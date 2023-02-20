@@ -1,169 +1,80 @@
 //your code here
-var gameNumber = document.getElementById("game-number")
-var playBtn = document.getElementById("play-game")
-var rock = document.getElementById("rock")
-var paper = document.getElementById("paper")
-var scissors = document.getElementById("scissors")
-var computerC = document.getElementById("computer-choose")
-var computerC1 = document.getElementById("computer-choose-1")
-var roundResult = document.getElementById("round-result")
-var roundResult1 = document.getElementById("round-result-1")
-var userP = document.getElementById("user-points")
-var computerP = document.getElementById("computer-points")
-var roundsLeft = document.getElementById("rounds-left")
-var gameResult = document.getElementById("game-result")
-var userP1 = document.getElementById("user-points-1")
-var computerP1 = document.getElementById("computer-points-1")
-var roundsLeft1 = document.getElementById("rounds-left-1")
+const compArray = ["rock", "paper", "scissor"];
+let userChoice = document.getElementById("user-choice").textContent;
+let computerChoice = document.getElementById("computer-choose").textContent;
+let userPoints = 0;
+document.getElementById("userPoints").textContent = userPoints;
+let compPoints = 0;
+document.getElementById("compPoints").textContent = compPoints;
 
+// game logic who wins and points increament
+function winnerWithChoice(userChoice, computerChoice) {
+  document.getElementById("user-choice").textContent = userChoice;
+  document.getElementById("computer-choose").textContent = computerChoice;
 
-var userPoints = 0;
-var computerPoints = 0;
-var RR = " ";
+  //  when match is tie
+  if (userChoice === computerChoice) {
+    document.getElementById("roundResult").textContent = "Tie";
 
-function play() {
-    if (gameNumber.value > 0) {
-        console.log("yes")
-        rock.style.display = "inline-block"
-        paper.style.display = "inline-block"
-        scissors.style.display = "inline-block"
-        computerC.style.display = "block"
-        roundResult.style.display = "block"
-        userP.style.display = "block"
-        computerP.style.display = "block"
-        roundsLeft.style.display = "block"
-        // computerC1.innerText = "  " + randomComputerChoose
-        roundsLeft1.innerText = "  " + gameNumber.value
-        userP1.innerText = "  " + userPoints
-        computerP1.innerText = "  " + computerPoints
-        // roundResult1.innerText = "  " + RR
+    // when comp wins
+  } else if (
+    (userChoice === "rock" && computerChoice === "paper") ||
+    (userChoice === "paper" && computerChoice === "scissor") ||
+    (userChoice === "scissor" && computerChoice === "rock")
+  ) {
+    compPoints++;
+    document.getElementById("roundResult").textContent = "Computer";
+    document.getElementById("compPoints").textContent = compPoints;
 
+    // when user wins
+  } else {
+    userPoints++;
+    document.getElementById("roundResult").textContent = "User";
+    document.getElementById("userPoints").textContent = userPoints;
+  }
 
-        function rockR() {
-            if (gameNumber.value > 0) {
-                var choices = ["ROCK", "PAPER", "SCISSORS"]
-                var computerChoose = Math.floor(Math.random() * choices.length)
-                var randomComputerChoose = choices[computerChoose]
-                if (randomComputerChoose == 'ROCK') {
-                    RR = 'TIE'
-                }
-                else if (randomComputerChoose == 'PAPER') {
-                    RR = 'Computer WON'
-                    computerPoints++
-                }
-                else {
-                    RR = "You WON"
-                    userPoints++
-                }
-                computerC1.innerText = "  " + randomComputerChoose
-                roundResult1.innerText = "  " + RR
-                userP1.innerText = "  " + userPoints
-                computerP1.innerText = "  " + computerPoints
-                gameNumber.value--
-                roundsLeft1.innerText = "  " + gameNumber.value
-                if (gameNumber.value == 0) {
-                    gameResult.style.display = "block"
-                    if (computerPoints > userPoints) {
-                        gameResult.innerText = "Game Result: Computer WON"
-                    }
-                    else if (userPoints > computerPoints) {
-                        gameResult.innerText = "Game Result: User WON"
-                    }
-                    else {
-                        gameResult.innerText = "Game Result: TIE"
-                    }
-                }
-            }
-
-        }
-
-        rock.onclick = rockR;
-
-        function paperP() {
-            if (gameNumber.value > 0) {
-                var choices = ["ROCK", "PAPER", "SCISSORS"]
-                var computerChoose = Math.floor(Math.random() * choices.length)
-                var randomComputerChoose = choices[computerChoose]
-                if (randomComputerChoose == 'ROCK') {
-                    RR = 'You WON'
-                    userPoints++
-                }
-                else if (randomComputerChoose == 'PAPER') {
-                    RR = 'TIE'
-                }
-                else {
-                    RR = "Computer WON"
-                    computerPoints++
-                }
-                computerC1.innerText = "  " + randomComputerChoose
-                roundResult1.innerText = "  " + RR
-                userP1.innerText = "  " + userPoints
-                computerP1.innerText = "  " + computerPoints
-                gameNumber.value--
-                roundsLeft1.innerText = "  " + gameNumber.value
-                if (gameNumber.value == 0) {
-                    gameResult.style.display = "block"
-                    if (computerPoints > userPoints) {
-                        gameResult.innerText = "Game Result: Computer WON"
-                    }
-                    else if (userPoints > computerPoints) {
-                        gameResult.innerText = "Game Result: User WON"
-                    }
-                    else {
-                        gameResult.innerText = "Game Result: TIE"
-                    }
-                }
-            }
-
-        }
-
-        paper.onclick = paperP;
-
-        function scissorsS() {
-            if (gameNumber.value > 0) {
-                var choices = ["ROCK", "PAPER", "SCISSORS"]
-                var computerChoose = Math.floor(Math.random() * choices.length)
-                var randomComputerChoose = choices[computerChoose]
-                if (randomComputerChoose == 'PAPER') {
-                    RR = 'You WON'
-                    userPoints++
-                }
-                else if (randomComputerChoose == 'SCISSORS') {
-                    RR = 'TIE'
-                }
-                else {
-                    RR = "Computer WON"
-                    computerPoints++
-                }
-                computerC1.innerText = "  " + randomComputerChoose
-                roundResult1.innerText = "  " + RR
-                userP1.innerText = "  " + userPoints
-                computerP1.innerText = "  " + computerPoints
-                gameNumber.value--
-                roundsLeft1.innerText = "  " + gameNumber.value
-                if (gameNumber.value == 0) {
-                    gameResult.style.display = "block"
-                    if (computerPoints > userPoints) {
-                        gameResult.innerText = "Game Result: Computer WON"
-                    }
-                    else if (userPoints > computerPoints) {
-                        gameResult.innerText = "Game Result: User WON"
-                    }
-                    else {
-                        gameResult.innerText = "Game Result: TIE"
-                    }
-                }
-            }
-
-        }
-
-        scissors.onclick = scissorsS;
-    }
-
+  // when user wins
 }
 
-playBtn.onclick = play;
+// Game starts after clicking on play button
+document.getElementById("play-game").addEventListener("click", function () {
+  let noOfRounds = Number(document.querySelector("#game-number").value);
+  let roundsLeft = noOfRounds;
 
+  // for loop
+  //   for (let i = 1; i <= noOfRounds; i++) {
 
+  let randomNumber = Math.floor(Math.random() * 3);
+  roundsLeft--;
 
+  document.getElementById("rock").addEventListener("click", function () {
+    userChoice = "rock";
+    computerChoice = compArray[randomNumber];
+    winnerWithChoice(userChoice, computerChoice);
+  });
 
+  document.getElementById("paper").addEventListener("click", function () {
+    userChoice = "paper";
+    document.getElementById("user-choice").textContent = userChoice;
+    computerChoice = compArray[randomNumber];
+    winnerWithChoice(userChoice, computerChoice);
+  });
+
+  document.getElementById("scissor").addEventListener("click", function () {
+    userChoice = "scissor";
+    document.getElementById("user-choice").textContent = userChoice;
+    computerChoice = compArray[randomNumber];
+    winnerWithChoice(userChoice, computerChoice);
+  });
+  // updating the rounds left
+  document.getElementById("roundsLeft").textContent = roundsLeft;
+
+  //   }
+
+  // Final Game winner
+  if (userPoints > compPoints) {
+    document.getElementById("game-result").textContent = "User";
+  } else if (userPoints < compPoints) {
+    document.getElementById("game-result").textContent = "Computer";
+  } else document.getElementById("game-result").textContent = "Tie";
+});
